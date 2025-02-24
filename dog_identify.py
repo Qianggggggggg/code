@@ -118,7 +118,7 @@ def get_net(devices):
 pretrained_net = get_net(device)
 
 # ==============================
-# 定义优化器和学习率调度器（使用 ReduceLROnPlateau 策略）
+# 定义优化器和学习率调度器
 # ==============================
 # 修改优化器参数
 optimizer = torch.optim.AdamW(
@@ -153,8 +153,8 @@ cosine_scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(
 def evaluate_accuracy(data_iter, net, loss_fn, device=None, use_ema=False, ema_model=None):
     """
     计算验证集的准确率和损失
-    :param use_ema: 是否使用EMA模型
-    :param ema_model: EMA模型实例
+    use_ema: 是否使用EMA模型
+    ema_model: EMA模型实例
     """
     if device is None and isinstance(net, nn.Module):
         device = next(net.parameters()).device
@@ -267,11 +267,11 @@ def train(train_iter, test_iter, net, loss, optimizer, device, num_epochs,
         print(f"  Val Loss (EMA): {ema_test_loss:.4f}  Val Acc (EMA): {ema_test_acc:.4f}")
 
         # 动态切换调度策略
-        if epoch < 15:  # 前5个epoch使用cosine
-            cosine_scheduler.step(epoch + 0.5)  # 需要传入当前epoch
+        if epoch < 12:  # 前12个epoch使用cosine
+            cosine_scheduler.step(epoch)  # 需要传入当前epoch
             current_scheduler = "cosine"
-        else:  # 第5个epoch之后使用plateau
-            if epoch == 15:
+        else:  # 第12个epoch之后使用plateau
+            if epoch == 12:
                 # 将plateau的基准学习率设为当前值
                 for i, group in enumerate(optimizer.param_groups):
                     group['initial_lr'] = group['lr']
@@ -340,8 +340,5 @@ def train_fine_tuning(net, optimizer, batch_size=64, num_epochs=50):
     best_acc = train(train_iter, val_iter, net, loss_fn, optimizer, device, num_epochs)
     return best_acc
 
-# ==============================
-# 启动微调训练
-# ==============================
 if __name__ == '__main__':
     train_fine_tuning(pretrained_net, optimizer)
