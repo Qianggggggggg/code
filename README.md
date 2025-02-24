@@ -18,9 +18,9 @@
   -  学习率/梯度分布/过拟合分析
 
  ##  实验记录如下
-  -  训练集：
-  -  ![image](https://github.com/Qianggggggggg/code/blob/main/record/train.png)
-  -  测试集：
-  -  ![image](https://github.com/Qianggggggggg/code/blob/main/record/val.png)
-  -  测试集（ema）：
-  -  ![image](https://github.com/Qianggggggggg/code/blob/main/record/val_ema.png)
+  -  **训练集：**
+    ![image](https://github.com/Qianggggggggg/code/blob/main/record/train.png)
+  -  **测试集：**
+    ![image](https://github.com/Qianggggggggg/code/blob/main/record/val.png)
+  -  **测试集（ema）：**
+    ![image](https://github.com/Qianggggggggg/code/blob/main/record/val_ema.png)
