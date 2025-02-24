@@ -17,7 +17,7 @@
   -  TensorBoard实时追踪指标
   -  学习率/梯度分布/过拟合分析
 
- ##实验记录如下
+ ##  实验记录如下
   -  训练集：
   -  ![image](https://github.com/Qianggggggggg/code/blob/main/record/train.png)
   -  测试集：
